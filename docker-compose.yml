@@ -1,0 +1,41 @@
+# Use root/example as user/password credentials
+version: "3.9"
+
+services:
+  db:
+    image: "mysql"
+    restart: always
+    networks:
+      - default
+    cap_add:
+      - SYS_NICE
+    environment:
+      MYSQL_DATABASE: "db"
+      # So you don't have to use root, but you can if you like
+      MYSQL_USER: "user"
+      # You can use whatever password you like
+      MYSQL_PASSWORD: "password"
+      # Password for root access
+      MYSQL_ROOT_PASSWORD: "Georgette1965"
+    ports:
+      - 3306:3306
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d/:ro
+
+  app:
+    build:
+      context: .
+    networks:
+      - default
+    ports:
+      - 5000:5000
+    environment:
+      - DEBUG=1
+    depends_on:
+      - db
+    volumes:
+      - ./migrations:/app/migrations
+      - ./app:/app/app
+
+volumes:
+  my-db:

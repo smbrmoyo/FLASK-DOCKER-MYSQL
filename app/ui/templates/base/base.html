@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>User-Interface</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('ui.static', filename='normalize.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('ui.static', filename='skeleton.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('ui.static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container" align="center">
+      <ul class="navigation" align="center">
+        <li class="navigation-item">
+          <a href="/ui">Index</a>
+        </li>
+        <li class="navigation-item">
+          <a href="/ui/light">Light</a>
+        </li>
+        <li class="navigation-item">
+          <a href="/ui/humidity">Humidity</a>
+        </li>
+        <li class="navigation-item">
+          <a href="/ui/temperature">Temperature</a>
+        </li>
+        </li>
+      </ul>
+      <div style="clear: both">&nbsp;</div>
+
+      {% block content %} {% endblock %}
+    </div>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+{% extends 'base/base.html' %} {% block content %}
+<h4 class="center">Data</h4>
+<canvas id="lineChart" width="900" height="400"></canvas>
+<script>
+  let ctx = document.getElementById("lineChart").getContext("2d");
+  let lineChart = new Chart(ctx, {
+      type: "line",
+      data: {
+          labels: {{ labels | safe }},
+          datasets: [
+              {
+              label: "Temperature",
+              data: {{ values | safe }},
+              fill: false,
+              borderColor: "rgb(32, 150, 80)",
+              lineTension: 0.1
+              }
+          ]
+      },
+      options: {
+          responsive: false
+      }
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %} {% block head %} All Buildings {% endblock %} {% block
+content %}
+<div class="content" align="center">
+  <h1 style="text-align: center">Searched building</h1>
+  {% if buildings|length < 1 %}
+  <h4 style="text-align: center">There are no buildings.</h4>
+  {% else %}
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Created at</th>
+    </tr>
+    {% for building in buildings %}
+    <tr>
+      <td>{{ building.building_name }}</td>
+      <td>{{ building.created_at.date() }}</td>
+      <td>
+        <a href="/api/update-building/{{building.id}}">Update</a>
+        <a href="/api/delete-building/{{building.id}}">Delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% endif %}
+</div>
+{% endblock %}
